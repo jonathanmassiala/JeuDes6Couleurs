@@ -3,7 +3,9 @@ package jeu.jonathan;
 import java.util.Random;
 
 public class Board {
-
+    //Attributes
+    private Case[][] grid;
+    private int size;
     private Color[] colors = Color.values();
 
     /**
