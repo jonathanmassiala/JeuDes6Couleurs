@@ -11,7 +11,7 @@ public class Main {
          }
          });*/
         Board board = new Board();
-        board.displayBoard(13);
+        board.displayFirstBoard(13);
 
     }
 }
