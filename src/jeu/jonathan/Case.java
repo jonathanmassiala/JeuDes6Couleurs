@@ -3,12 +3,11 @@ package jeu.jonathan;
 public class Case {
 
     private Color color;
-    private int owner = 0;
-    private boolean taken = false;
+    private int owner;
+    private boolean isOwned = false;
 
     public void setColor(Color color) {
         this.color = color;
-        taken = true;
     }
 
     public Color getColor() {
@@ -17,5 +16,10 @@ public class Case {
 
     public void setOwner(int owner) {
         this.owner = owner;
+        this.isOwned = true;
+    }
+
+    public int getOwner() {
+        return this.owner;
     }
 }
