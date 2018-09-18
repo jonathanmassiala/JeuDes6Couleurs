@@ -64,13 +64,7 @@ import java.util.TreeSet;
 import java.util.NoSuchElementException;
 import javax.imageio.ImageIO;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 /**
  *  The {@code StdDraw} class provides a basic capability for
@@ -614,7 +608,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static StdDraw std = new StdDraw();
 
     // the frame for drawing to the screen
-    private static JFrame frame;
+    private static JFrame frame = Game.getFrame();
+    private static JPanel panel;
 
     // mouse state
     private static boolean isMousePressed = false;
@@ -670,7 +665,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     // init
     private static void init() {
         if (frame != null) frame.setVisible(false);
-        frame = new JFrame();
+        panel = new JPanel();
         offscreenImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         onscreenImage  = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         offscreen = offscreenImage.createGraphics();
@@ -696,17 +691,21 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
         draw.addMouseListener(std);
         draw.addMouseMotionListener(std);
-
-        frame.setContentPane(draw);
-        frame.addKeyListener(std);    // JLabel cannot get keyboard focus
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);            // closes all windows
+        panel.add(draw);
+        //frame.setContentPane(draw);
+        //frame.addKeyListener(std);    // JLabel cannot get keyboard focus
+        //frame.setResizable(false);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);            // closes all windows
         // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      // closes only current window
-        frame.setTitle("Standard Draw");
-        frame.setJMenuBar(createMenuBar());
-        frame.pack();
-        frame.requestFocusInWindow();
-        frame.setVisible(true);
+        //frame.setTitle("Standard Draw");
+        //frame.setJMenuBar(createMenuBar());
+        //frame.pack();
+        //frame.requestFocusInWindow();
+        //frame.setVisible(true);
+    }
+
+    public static JPanel getPanel() {
+        return panel;
     }
 
     // create the menu bar (changed to private)
@@ -1565,7 +1564,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      */
     public static void show() {
         onscreen.drawImage(offscreenImage, 0, 0, null);
-        frame.repaint();
+        panel.repaint();
     }
 
     // draw onscreen if defer is false

@@ -1,19 +1,54 @@
 package jeu.jonathan;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class Frame extends JFrame {
 
+    private static CardLayout cl = new CardLayout();
+    static JPanel content = new JPanel();
+    static String[] listContent = {"New Game Pane", "Game Pane"};
+    int indice = 0;
+
     public Frame() {
         this.setTitle("Jeu des 6 couleurs");
-        this.setSize(1200, 700);
+        this.setSize(1000, 850);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
-        this.setLocationRelativeTo(null);
+
+        NewGamePane newGamePane = new NewGamePane();
+
+        content.setLayout(cl);
+        content.add(newGamePane, listContent[0]);
+
+
+        this.getContentPane().add(content, BorderLayout.CENTER);
+
         this.setVisible(true);
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.orange);
-        this.setContentPane(new Pane());
     }
+
+
+    public static void changePanel(int index) {
+        content.add(NewGamePane.getGamePane(), listContent[1]);
+        cl.show(content, listContent[index]);
+
+    }
+
+
+    /*public Frame(){
+        this.setTitle("Jeu des 6 couleurs");
+        this.setSize(1000, 850);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(true);
+        this.add(StdDraw.getPanel());
+        this.setVisible(true);
+    }*/
+
+
+
 }

@@ -5,9 +5,9 @@ public class Player {
     private int playerId;
     private boolean isIA = false;
     private int nbCasesControlled = 1;
-    private Color currentColorControlled;
+    private Couleur currentColorControlled;
 
-    public Player(int playerId, boolean isIA, Color currentColorControlled) {
+    public Player(int playerId, boolean isIA, Couleur currentColorControlled) {
         this.playerId = playerId;
         this.isIA = isIA;
         this.currentColorControlled = currentColorControlled;
