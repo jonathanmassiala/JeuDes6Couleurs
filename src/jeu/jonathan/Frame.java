@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 public class Frame extends JFrame {
@@ -13,7 +14,7 @@ public class Frame extends JFrame {
     static String[] listContent = {"New Game Pane", "Game Pane"};
     int indice = 0;
 
-    public Frame() {
+    public Frame() throws IOException, FontFormatException {
         this.setTitle("Jeu des 6 couleurs");
         this.setSize(1000, 850);
         this.setLocationRelativeTo(null);

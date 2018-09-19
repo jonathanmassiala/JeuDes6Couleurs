@@ -13,8 +13,11 @@ public class Game {
     }
 
     public static void start() {
-        Board board = new HexagonGrid(10);
-        board.jeu(2);
+        //JFrame frame = new Frame();
+        /*int size = NewGamePane.getSizeBoard();
+        int nbPlayer = NewGamePane.getNbPlayer();
+        Board board = new HexagonGrid(size);
+        board.jeu(nbPlayer);*/
     }
 
     public static JFrame getFrame() {

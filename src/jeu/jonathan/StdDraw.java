@@ -705,7 +705,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     public static JPanel getPanel() {
+        setCanvasSize(1000,850);
         return panel;
+
     }
 
     // create the menu bar (changed to private)

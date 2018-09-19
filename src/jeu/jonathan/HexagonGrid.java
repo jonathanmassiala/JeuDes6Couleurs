@@ -1,5 +1,6 @@
 package jeu.jonathan;
 
+import java.awt.*;
 import java.util.Random;
 
 public class HexagonGrid extends Board {
@@ -14,7 +15,8 @@ public class HexagonGrid extends Board {
         }
         this.size = size;
         this.sizeBoard = 4 + 6 * size;
-        this.tailleInterface = 0.25;
+        //this.sizeBoard =  4 * size;
+        this.tailleInterface = 0.3;
         this.nbCases = 3 * size * (size + 1) + 1;
         cases = new Case[2 * size + 1][2 * size + 1];
         Random random = new Random();
@@ -55,8 +57,8 @@ public class HexagonGrid extends Board {
 
         int index;
 
-        for (int couleur : colorByPlayer) {
-            index = notControlledColors.indexOf(couleur);
+        for (int color : colorByPlayer) {
+            index = notControlledColors.indexOf(color);
             notControlledColors.remove(index);
         }
 
@@ -162,7 +164,9 @@ public class HexagonGrid extends Board {
             x[k] -= (2 * longueur + 1) * RACINE_3;
             y[k] += 3 * directionY;
         }
+
         StdDraw.filledPolygon(x, y);
+
         drawCases(x, y, size - directionY * (2 * size - longueur), 0);
     }
 
@@ -226,33 +230,33 @@ public class HexagonGrid extends Board {
         switch (cases[i][j].getCouleur()) {
             case r:
             case R:
-                StdDraw.setPenColor(StdDraw.RED);
+                StdDraw.setPenColor(225,0,0);
                 break;
             case o:
             case O:
-                StdDraw.setPenColor(StdDraw.ORANGE);
+                StdDraw.setPenColor(247,92,3);
                 break;
             case j:
             case J:
-                StdDraw.setPenColor(StdDraw.YELLOW);
+                StdDraw.setPenColor(252,212,0);
                 break;
             case v:
             case V:
-                StdDraw.setPenColor(StdDraw.GREEN);
+                StdDraw.setPenColor(26,215,71);
                 break;
             case b:
             case B:
-                StdDraw.setPenColor(StdDraw.BLUE);
+                StdDraw.setPenColor(22,144,243);
                 break;
             case i:
             case I:
-                StdDraw.setPenColor(StdDraw.MAGENTA);
+                StdDraw.setPenColor(201,0,187);
                 break;
             default:
                 break;
         }
         StdDraw.filledPolygon(x, y);
-
+        drawContour(x,y);
         StdDraw.setFont();
         StdDraw.setPenColor(StdDraw.BLACK);
         switch (cases[i][j].getOwner()) {
@@ -271,6 +275,11 @@ public class HexagonGrid extends Board {
             default:
                 break;
         }
+    }
+
+    private void drawContour(double[] x, double[] y){
+        StdDraw.setPenColor(Color.BLACK);
+        StdDraw.polygon(x,y);
     }
 
     @Override

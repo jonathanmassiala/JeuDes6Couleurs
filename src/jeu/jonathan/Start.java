@@ -1,10 +1,12 @@
 package jeu.jonathan;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 public class Start {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FontFormatException {
 
         JFrame frame = new Frame();
         //Game game = new Game();
@@ -12,7 +14,8 @@ public class Start {
         int size = NewGamePane.getSizeBoard();
         int nbPlayer = NewGamePane.getNbPlayer();
         Board board = new HexagonGrid(size);
-        board.jeu(nbPlayer);
+        board.jeu(1, 1, 2);
+
         /*StdDraw.setCanvasSize(1000, 700);
         StdDraw.setPenRadius(0.05);
         StdDraw.setPenColor(StdDraw.BLUE);

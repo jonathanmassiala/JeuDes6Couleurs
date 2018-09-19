@@ -6,12 +6,15 @@ import java.awt.*;
 public class GamePane extends JPanel {
 
     private String color = "BLEU";
+    private JPanel stddrawPanel;
 
 
     GamePane(){
         setBackground(color);
+        stddrawPanel = StdDraw.getPanel();
+        this.add(stddrawPanel);
+        stddrawPanel.setSize(this.getWidth(),this.getHeight());
 
-        this.add(StdDraw.getPanel());
 
 
     }

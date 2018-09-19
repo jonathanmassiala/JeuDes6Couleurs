@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Objects;
 
 public class NewGamePane extends JPanel {
@@ -13,12 +17,22 @@ public class NewGamePane extends JPanel {
 
     private JComboBox combo;
     private static GamePane gamePane = new GamePane();
+    private Font gameFont;
 
-    public NewGamePane() {
+    public NewGamePane() throws IOException, FontFormatException {
         this.setBackground(Color.orange);
         this.setLayout(new BorderLayout());
 
-        JLabel label = new JLabel("Couleur");
+        JLabel label = new JLabel("NOUVELLE PARTIE");
+
+        try {
+            Font gameFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/astron boy.ttf"));
+            label.setFont(gameFont.deriveFont(Font.BOLD, 48f));
+        } catch (FontFormatException | IOException ex) {
+            ex.printStackTrace();
+        }
+
+
 
         String[] tab = {"BLEU", "VERT", "ROUGE", "NOIR"};
         combo = new JComboBox(tab);
