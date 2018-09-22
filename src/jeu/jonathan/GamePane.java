@@ -42,9 +42,6 @@ public class GamePane extends JPanel {
         setBackground(color);
     }
 
-    public void startGame(){
-        Game.start();
-    }
 
 
 

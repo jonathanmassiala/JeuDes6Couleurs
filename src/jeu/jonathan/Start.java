@@ -11,10 +11,10 @@ public class Start {
         JFrame frame = new Frame();
         //Game game = new Game();
         //game.start();
-        int size = NewGamePane.getSizeBoard();
-        int nbPlayer = NewGamePane.getNbPlayer();
-        Board board = new HexagonGrid(size);
-        board.jeu(1, 1, 2);
+        //int size = SetUpPane.getSizeBoard();
+        //int nbPlayer = NewGamePane.getNbPlayer();
+        //Board board = new HexagonGrid(size);
+        //board.jeu(nbPlayer);
 
         /*StdDraw.setCanvasSize(1000, 700);
         StdDraw.setPenRadius(0.05);
