@@ -4,77 +4,56 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Objects;
 
-public class SetUpPane extends JPanel {
+class SetUpPane extends JPanel {
 
     private JComboBox comboSize;
-    private JCheckBox check2Players = new JCheckBox("2");
-    private JCheckBox check3Players = new JCheckBox("3");
-    private JCheckBox check4Players = new JCheckBox("4");
-    private JComboBox comboVS;
-    private JComboBox comboDifficulty;
-    private static int nbPlayer = 2;
-    private static int sizeBoard;
+    private static JComboBox comboVS;
+    private static int nbPlayer = 1;
+    private static int sizeBoard = 7;
+    private static int nbIA = 1;
 
     SetUpPane(){
 
         this.setLayout(new GridLayout(4, 2));
 
         JLabel choiceSize = new JLabel("Choisissez la taille du plateau :");
-        String[] tab0 = new String[14];
+        String[] tabSize = new String[14];
         for (int i = 7; i < 21; i++) {
-            tab0[i - 7] = Integer.toString(i) + " cases de coté";
+            tabSize[i - 7] = Integer.toString(i) + " cases de coté";
         }
-        comboSize = new JComboBox(tab0);
+        comboSize = new JComboBox(tabSize);
         comboSize.setSelectedIndex(0);
         comboSize.setPreferredSize(new Dimension(50,20));
         comboSize.addActionListener(new SizeListener());
 
-        JLabel choiceNbPlayer = new JLabel("Choisissez le nombre de joueurs :");
-        JPanel checkboxes = new JPanel();
-        check2Players.setSelected(true);
-        check3Players.setSelected(false);
-        check4Players.setSelected(false);
-        checkboxes.add(check2Players);
-        checkboxes.add(check3Players);
-        checkboxes.add(check4Players);
+        JLabel choiceNbPlayer = new JLabel("Choisissez le nombre et le type des joueurs qui vont s'affronter:");
+        String[] tabVS;
+        tabVS = new String[]{
+                "2 Joueurs : Humain VS Ordinateur",
+                "2 Joueurs : Humain VS Humain",
+                "2 Joueurs : Ordinateur VS Ordinateur",
+                "3 Joueurs : Humains",
+                "3 Joueurs : Ordinateurs",
+                "3 Joueurs : 1 Humains VS 2 Ordinateurs",
+                "3 Joueurs : 2 Humains VS 1 Ordinateur",
+                "4 Joueurs : Humains",
+                "4 Joueurs : Ordinateurs",
+                "4 Joueurs : 1 Humains VS 3 Ordinateurs",
+                "4 Joueurs : 2 Humains VS 2 Ordinateurs",
+                "4 Joueurs : 3 Humains VS 1 Ordinateur"
+        };
+        comboVS = new JComboBox(tabVS);
+        comboVS.setSelectedIndex(0);
+        comboVS.setPreferredSize(new Dimension(50,30));
+        comboVS.addActionListener(new VSListener());
 
-        JLabel choiceTypePlayer = new JLabel("Maintenant choisissez le type de joueurs qui va s'affronter :");
-        comboVS = new JComboBox(getVSList(nbPlayer).toArray(new String[getVSList(nbPlayer).size()]));
 
 
         this.add(choiceSize);
         this.add(comboSize);
         this.add(choiceNbPlayer);
-        this.add(checkboxes);
-        this.add(choiceTypePlayer);
         this.add(comboVS);
-    }
-
-    private ArrayList getVSList(int nbPlayer) {
-        ArrayList<String> vsList = new ArrayList<String>();
-        if (nbPlayer == 2) {
-            vsList.add("Humain VS Ordinateur");
-            vsList.add("Humain VS Humain");
-            vsList.add("Ordinateur VS Ordinateur");
-        }
-        if (nbPlayer == 3) {
-            vsList.add("1 Joueur Humains & Deux Joueurs Ordinateurs");
-            vsList.add("3 Joueurs Humains");
-            vsList.add("2 Joueurs Humains & 1 Joueur Ordinateur");
-            vsList.add( "2 Joueurs Ordinateurs");
-
-        }
-        if (nbPlayer == 4) {
-            vsList.add("4 Joueurs Humains");
-            vsList.add("1 Joueur Humains & 3 Joueurs Ordinateurs");
-            vsList.add("2 Joueurs Humains & 2 Joueurs Ordinateurs");
-            vsList.add("3 Joueurs Humains & 1 Joueur Ordinateur");
-            vsList.add( "4 Joueurs Ordinateurs");
-        }
-        return vsList;
     }
 
     private class SizeListener implements ActionListener {
@@ -91,15 +70,72 @@ public class SetUpPane extends JPanel {
         }
     }
 
-    public static int getSizeBoard(){
+    static int getSizeBoard(){
         return sizeBoard;
     }
 
-    private class ColorListener implements ActionListener {
+    private class VSListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-
+            System.out.println(comboVS.getSelectedIndex());
+            switch (comboVS.getSelectedIndex()) {
+                case 0:
+                    nbPlayer = 1;
+                    nbIA = 1;
+                    break;
+                case 1:
+                    nbPlayer = 2;
+                    nbIA = 0;
+                    break;
+                case 2:
+                    nbPlayer = 0;
+                    nbIA = 1;
+                    break;
+                case 3:
+                    nbPlayer = 3;
+                    nbIA = 0;
+                    break;
+                case 4:
+                    nbPlayer = 0;
+                    nbIA = 3;
+                    break;
+                case 5:
+                    nbPlayer = 1;
+                    nbIA = 2;
+                    break;
+                case 6:
+                    nbPlayer = 2;
+                    nbIA = 1;
+                    break;
+                case 7:
+                    nbPlayer = 4;
+                    nbIA = 0;
+                    break;
+                case 8:
+                    nbPlayer = 0;
+                    nbIA = 4;
+                    break;
+                case 9:
+                    nbPlayer = 1;
+                    nbIA = 3;
+                    break;
+                case 10:
+                    nbPlayer = 2;
+                    nbIA = 2;
+                    break;
+                case 11:
+                    nbPlayer = 3;
+                    nbIA = 1;
+                    break;
+            }
         }
+    }
+
+    static int getNbPlayer(){
+        return nbPlayer;
+    }
+
+    static int getNbIA(){
+        return nbIA;
     }
 }

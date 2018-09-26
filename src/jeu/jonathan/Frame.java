@@ -2,8 +2,6 @@ package jeu.jonathan;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 
@@ -39,16 +37,6 @@ public class Frame extends JFrame {
 
     }
 
-
-    /*public Frame(){
-        this.setTitle("Jeu des 6 couleurs");
-        this.setSize(1000, 850);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-        this.add(StdDraw.getPanel());
-        this.setVisible(true);
-    }*/
 
 
 
