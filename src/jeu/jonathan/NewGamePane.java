@@ -13,6 +13,8 @@ class NewGamePane extends JPanel {
         this.setLayout(new BorderLayout());
 
         JLabel title = new JLabel("NOUVELLE PARTIE");
+        Font font = new Font("Calibri",Font.CENTER_BASELINE,20);
+        title.setFont(font);
         //title.setVerticalAlignment();
 
 

@@ -26,6 +26,11 @@ public class Frame extends JFrame {
 
 
         this.getContentPane().add(content, BorderLayout.CENTER);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         this.setVisible(true);
     }
