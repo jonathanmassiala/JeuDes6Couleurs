@@ -1,6 +1,7 @@
 package jeu.jonathan;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 class NewGamePane extends JPanel {
@@ -13,9 +14,9 @@ class NewGamePane extends JPanel {
         this.setLayout(new BorderLayout());
 
         JLabel title = new JLabel("NOUVELLE PARTIE");
-        Font font = new Font("Calibri",Font.CENTER_BASELINE,20);
+        Font font = new Font("Calibri",Font.ITALIC,30);
         title.setFont(font);
-        //title.setVerticalAlignment();
+        title.setBorder(new EmptyBorder(20,20,20,20));
 
 
         JButton playButton = new JButton("Play");
@@ -27,7 +28,7 @@ class NewGamePane extends JPanel {
             t.start();
             Frame.changePanel(1);
         });
-        //playButton.
+        //playButton.setBorder(new EmptyBorder(0,50,0,0));
 
         this.add(title, BorderLayout.NORTH);
         SetUpPane setUpPane = new SetUpPane();

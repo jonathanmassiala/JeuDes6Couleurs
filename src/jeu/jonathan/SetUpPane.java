@@ -1,6 +1,7 @@
 package jeu.jonathan;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +12,7 @@ class SetUpPane extends JPanel {
     private static JComboBox comboVS;
     private JRadioButton difficulty1;
     private JRadioButton difficulty2;
-    private ButtonGroup diffiultyGroup = new ButtonGroup();
+    private ButtonGroup difficultyGroup = new ButtonGroup();
     private static int difficulty = 1;
     private static int nbPlayer = 1;
     private static int sizeBoard = 7;
@@ -19,8 +20,17 @@ class SetUpPane extends JPanel {
 
     SetUpPane(){
 
-        this.setLayout(new GridLayout(4, 2));
+        JLabel title = new JLabel("Paramètres de jeu");
+        Font font = new Font("Calibri",Font.TRUETYPE_FONT,20);
+        title.setFont(font);
+        JPanel titlePanel = new JPanel(new GridLayout(1,1));
+        titlePanel.add(title);
+        titlePanel.setBorder(new EmptyBorder(20,350,0,0));
+        titlePanel.setMaximumSize(new Dimension(850,100));
+        //title.setBorder(new EmptyBorder(20,0,20,0));
 
+        JPanel sizePanel = new JPanel(new GridLayout(1,2));
+        sizePanel.setMaximumSize(new Dimension(850,100));
         JLabel choiceSize = new JLabel("Choisissez la taille du plateau :");
         String[] tabSize = new String[14];
         for (int i = 7; i < 21; i++) {
@@ -28,10 +38,17 @@ class SetUpPane extends JPanel {
         }
         comboSize = new JComboBox(tabSize);
         comboSize.setSelectedIndex(0);
-        comboSize.setPreferredSize(new Dimension(50,20));
+        comboSize.setMaximumSize(new Dimension(300,30));
+        comboSize.setBorder(new EmptyBorder(0,0,0,50));
         comboSize.addActionListener(new SizeListener());
+        sizePanel.add(choiceSize);
+        sizePanel.add(comboSize);
+        sizePanel.setBorder(new EmptyBorder(40,0,0,0));
 
+        JPanel vsPanel = new JPanel(new GridLayout(1,2));
+        vsPanel.setMaximumSize(new Dimension(850,100));
         JLabel choiceNbPlayer = new JLabel("Choisissez le nombre et le type des joueurs qui vont s'affronter:");
+        //choiceNbPlayer.setBorder(new EmptyBorder(20,20,20,20));
         String[] tabVS;
         tabVS = new String[]{
                 "2 Joueurs : Humain VS Ordinateur",
@@ -49,15 +66,21 @@ class SetUpPane extends JPanel {
         };
         comboVS = new JComboBox(tabVS);
         comboVS.setSelectedIndex(0);
-        comboVS.setPreferredSize(new Dimension(50,30));
+        comboVS.setMaximumSize(new Dimension(300,30));
+        comboVS.setBorder(new EmptyBorder(0,0,0,50));
         comboVS.addActionListener(new VSListener());
+        vsPanel.add(choiceNbPlayer);
+        vsPanel.add(comboVS);
+        vsPanel.setBorder(new EmptyBorder(40,0,0,0));
 
+        JPanel diffPanel = new JPanel(new GridLayout(1,2));
+        diffPanel.setMaximumSize(new Dimension(850,100));
         JLabel choiceDifficulty = new JLabel(
-                "Choisissez le niveau de difficulté : (Ignorez cette étape si tous les joueurs qui s'affrontent sont humais)"
+                "<html><p>Choisissez le niveau de difficulté :<br>(Ignorez cette étape si tous les joueurs sont humains)</p></html>)"
         );
-        JPanel diffPanel = new JPanel();
-        difficulty1 = new JRadioButton("1 (choix de case aléatoire)");
-        difficulty2 = new JRadioButton("2");
+        //choiceDifficulty.setBorder(new EmptyBorder(20,20,20,20));
+        difficulty1 = new JRadioButton("Niveau 1 (choix aléatoire)");
+        difficulty2 = new JRadioButton("Niveau 2");
         difficulty1.setSelected(true);
         difficulty1.addActionListener(new ActionListener() {
             @Override
@@ -71,17 +94,19 @@ class SetUpPane extends JPanel {
                 difficulty = 2;
             }
         });
-        diffiultyGroup.add(difficulty1);
-        diffiultyGroup.add(difficulty2);
-        diffPanel.add(difficulty1);
-        diffPanel.add(difficulty2);
+        difficultyGroup.add(difficulty1);
+        difficultyGroup.add(difficulty2);
+        diffPanel.add(choiceDifficulty);
+        JPanel buttonGroupPanel = new JPanel();
+        buttonGroupPanel.add(difficulty1);
+        buttonGroupPanel.add(difficulty2);
+        diffPanel.add(buttonGroupPanel);
+        diffPanel.setBorder(new EmptyBorder(40,0,0,0));
 
-
-        this.add(choiceSize);
-        this.add(comboSize);
-        this.add(choiceNbPlayer);
-        this.add(comboVS);
-        this.add(choiceDifficulty);
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.add(titlePanel);
+        this.add(sizePanel);
+        this.add(vsPanel);
         this.add(diffPanel);
     }
 
