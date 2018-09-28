@@ -17,7 +17,7 @@ public abstract class Board {
     protected static int[] capturedCasesByPlayer= new int[4];
     protected boolean game = true;
     protected Couleur[] couleurs = Couleur.values();
-    protected int[] colorByPlayer;
+    protected int[] colorTakenByAPlayer;
     protected static ArrayList<Integer> notControlledColors;
     protected Color[] colors = {StdDraw.RED, StdDraw.ORANGE, StdDraw.YELLOW, StdDraw.GREEN, StdDraw.BLUE, StdDraw.MAGENTA};
 
@@ -36,12 +36,8 @@ public abstract class Board {
         }
     }
 
-    public void jeu(int nbreJoueursHumains) {
-        jeu(nbreJoueursHumains, 0, 0);
-    }
-
     protected int validerCouleur(int numeroCouleur, int numeroJoueur) {
-        for (int a : colorByPlayer) {
+        for (int a : colorTakenByAPlayer) {
             if (a == numeroCouleur) {
                 JOptionPane.showMessageDialog(null, "Cette couleur est déjà utilisée par un autre joueur!");
                 numeroCouleur = validerCouleur(getMouseXY(), numeroJoueur);

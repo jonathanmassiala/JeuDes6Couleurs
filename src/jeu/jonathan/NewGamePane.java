@@ -13,16 +13,19 @@ class NewGamePane extends JPanel {
         this.setLayout(new BorderLayout());
 
         JLabel title = new JLabel("NOUVELLE PARTIE");
-
+        //title.setVerticalAlignment();
 
 
         JButton playButton = new JButton("Play");
         playButton.addActionListener(e -> {
             t = new Thread(new Game());
+            if (t.isAlive()){
+                t.interrupt();
+            }
             t.start();
             Frame.changePanel(1);
         });
-
+        //playButton.
 
         this.add(title, BorderLayout.NORTH);
         SetUpPane setUpPane = new SetUpPane();

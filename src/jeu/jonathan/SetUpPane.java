@@ -77,7 +77,7 @@ class SetUpPane extends JPanel {
     private class VSListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(comboVS.getSelectedIndex());
+            System.out.println("case :" + comboVS.getSelectedIndex());
             switch (comboVS.getSelectedIndex()) {
                 case 0:
                     nbPlayer = 1;

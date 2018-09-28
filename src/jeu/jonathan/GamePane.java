@@ -5,44 +5,25 @@ import java.awt.*;
 
 public class GamePane extends JPanel {
 
-    private String color = "BLEU";
     private JPanel stddrawPanel;
 
 
     GamePane(){
-        setBackground(color);
-        stddrawPanel = StdDraw.getPanel();
-        this.add(stddrawPanel);
+        this.setLayout(new BorderLayout());
+        stddrawPanel = StdDraw.getNewPanel();
+        this.add(stddrawPanel,BorderLayout.CENTER);
         stddrawPanel.setSize(this.getWidth(),this.getHeight());
 
+        JButton newGameButton = new JButton("Nouvelle Partie");
+        newGameButton.addActionListener(e -> {
+            //stddrawPanel.repaint();
+            Frame.changePanel(0);
+        });
+
+        this.add(newGameButton, BorderLayout.SOUTH);
 
 
     }
-
-
-    private void setBackground(String color) {
-        if(this.color.equals("BLEU")){
-            this.setBackground(Color.BLUE);
-        }
-        if(this.color.equals("VERT")) {
-            this.setBackground(Color.GREEN);
-        }
-
-        if(this.color.equals("ROUGE")) {
-            this.setBackground(Color.red);
-        }
-        if(this.color.equals("NOIR")){
-            setBackground(Color.BLACK);
-        }
-
-    }
-
-    public void setColor(String color){
-        this.color = color;
-        setBackground(color);
-    }
-
-
 
 
 }

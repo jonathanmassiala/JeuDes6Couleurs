@@ -1,6 +1,7 @@
 package jeu.jonathan;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class HexagonGrid extends Board {
@@ -51,19 +52,20 @@ public class HexagonGrid extends Board {
             capturedCasesByPlayer[i] = 1;
         }
 
-        colorByPlayer = new int[nbreJoueurs];
+        colorTakenByAPlayer = new int[nbreJoueurs];
 
         firstCases(nbreJoueurs);
 
         int index;
 
-        for (int color : colorByPlayer) {
+        for (int color : colorTakenByAPlayer) {
             index = notControlledColors.indexOf(color);
+            System.out.println("index :" + index);
             notControlledColors.remove(index);
         }
 
         displayBoard();
-        for (int i : colorByPlayer) {
+        for (int i : colorTakenByAPlayer) {
             StdDraw.setPenColor(StdDraw.BLACK);
             StdDraw.filledCircle(i * sizeBoard * 0.2 + sizeBoard * tailleInterface * 0.5, sizeBoard * 0.1, sizeBoard * 0.1);
         }
@@ -92,10 +94,10 @@ public class HexagonGrid extends Board {
                             break;
                     }
                 }
-                notControlledColors.add(colorByPlayer[i - 1]);
+                notControlledColors.add(colorTakenByAPlayer[i - 1]);
                 index = notControlledColors.indexOf(selectedButton);
                 notControlledColors.remove(index);
-                colorByPlayer[i - 1] = selectedButton;
+                colorTakenByAPlayer[i - 1] = selectedButton;
                 couleurUpper = couleurs[2 * selectedButton + 1];
                 couleurLower = couleurs[2 * selectedButton];
                 capture(couleurUpper, couleurLower, i);
@@ -104,7 +106,7 @@ public class HexagonGrid extends Board {
                     StdDraw.setPenColor(colors[k]);
                     StdDraw.filledSquare(k * sizeBoard * 0.2 + sizeBoard * tailleInterface * 0.5, sizeBoard * 0.1, sizeBoard * 0.1);
                 }
-                for (int k : colorByPlayer) {
+                for (int k : colorTakenByAPlayer) {
                     StdDraw.setPenColor(StdDraw.BLACK);
                     StdDraw.filledCircle(k * sizeBoard * 0.2 + sizeBoard * tailleInterface * 0.5, sizeBoard * 0.1, sizeBoard * 0.1);
                 }
@@ -284,52 +286,53 @@ public class HexagonGrid extends Board {
 
     @Override
     protected void firstCases(int nbreJoueurs) {
+        ArrayList<Integer> notControlledColors = new ArrayList<>();
         for (int i = 0, len = couleurs.length / 2; i < len; i += 1) {
-            Board.notControlledColors.add(i);
+            notControlledColors.add(i);
         }
         Random random = new Random();
-        int index = random.nextInt(Board.notControlledColors.size());
-        cases[2 * size][0].setCouleur(couleurs[2 * Board.notControlledColors.get(index) + 1]);
-        colorByPlayer[0] = Board.notControlledColors.get(index);
-        Board.notControlledColors.remove(index);
+        int index = random.nextInt(notControlledColors.size());
+        cases[2 * size][0].setCouleur(couleurs[2 * notControlledColors.get(index) + 1]);
+        colorTakenByAPlayer[0] = notControlledColors.get(index);
+        notControlledColors.remove(index);
         cases[2 * size][0].setOwner(1);
         cases[2 * size][0].notOwned();
         if (nbreJoueurs > 2) {
-            index = random.nextInt(Board.notControlledColors.size());
-            cases[0][0].setCouleur(couleurs[2 * Board.notControlledColors.get(index) + 1]);
-            colorByPlayer[1] = Board.notControlledColors.get(index);
-            Board.notControlledColors.remove(index);
+            index = random.nextInt(notControlledColors.size());
+            cases[0][0].setCouleur(couleurs[2 * notControlledColors.get(index) + 1]);
+            colorTakenByAPlayer[1] = notControlledColors.get(index);
+            notControlledColors.remove(index);
             cases[0][0].setOwner(2);
             cases[0][0].notOwned();
             if (nbreJoueurs > 3) {
-                index = random.nextInt(Board.notControlledColors.size());
-                cases[0][size].setCouleur(couleurs[2 * Board.notControlledColors.get(index) + 1]);
-                colorByPlayer[2] = Board.notControlledColors.get(index);
-                Board.notControlledColors.remove(index);
+                index = random.nextInt(notControlledColors.size());
+                cases[0][size].setCouleur(couleurs[2 * notControlledColors.get(index) + 1]);
+                colorTakenByAPlayer[2] = notControlledColors.get(index);
+                notControlledColors.remove(index);
                 cases[0][size].setOwner(3);
                 cases[0][size].notOwned();
-                index = random.nextInt(Board.notControlledColors.size());
-                cases[2 * size][size].setCouleur(couleurs[2 * Board.notControlledColors.get(index) + 1]);
-                colorByPlayer[3] = Board.notControlledColors.get(index);
-                Board.notControlledColors.remove(index);
+                index = random.nextInt(notControlledColors.size());
+                cases[2 * size][size].setCouleur(couleurs[2 * notControlledColors.get(index) + 1]);
+                colorTakenByAPlayer[3] = notControlledColors.get(index);
+                notControlledColors.remove(index);
                 cases[2 * size][size].setOwner(4);
                 cases[2 * size][size].notOwned();
             }
             else {
-                index = random.nextInt(Board.notControlledColors.size());
-                cases[size][2 * size].setCouleur(couleurs[2 * Board.notControlledColors.get(index) + 1]);
-                colorByPlayer[2] = Board.notControlledColors.get(index);
-                Board.notControlledColors.remove(index);
+                index = random.nextInt(notControlledColors.size());
+                cases[size][2 * size].setCouleur(couleurs[2 * notControlledColors.get(index) + 1]);
+                colorTakenByAPlayer[2] = notControlledColors.get(index);
+                notControlledColors.remove(index);
                 cases[size][2 * size].setOwner(3);
                 cases[size][2 * size].notOwned();
             }
 
         }
         else {
-            index = random.nextInt(Board.notControlledColors.size());
-            cases[0][size].setCouleur(couleurs[2 * Board.notControlledColors.get(index) + 1]);
-            colorByPlayer[1] = Board.notControlledColors.get(index);
-            Board.notControlledColors.remove(index);
+            index = random.nextInt(notControlledColors.size());
+            cases[0][size].setCouleur(couleurs[2 * notControlledColors.get(index) + 1]);
+            colorTakenByAPlayer[1] = notControlledColors.get(index);
+            notControlledColors.remove(index);
             cases[0][size].setOwner(2);
             cases[0][size].notOwned();
         }

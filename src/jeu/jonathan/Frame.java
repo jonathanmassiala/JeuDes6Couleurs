@@ -14,7 +14,7 @@ public class Frame extends JFrame {
 
     public Frame() throws IOException, FontFormatException {
         this.setTitle("Jeu des 6 couleurs");
-        this.setSize(1000, 850);
+        this.setSize(900, 1000);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
