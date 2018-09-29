@@ -10,19 +10,11 @@ public class GamePane extends JPanel {
 
     GamePane(){
         this.setLayout(new BorderLayout());
+        this.setBackground(Color.WHITE);
         stddrawPanel = StdDraw.getNewPanel();
         this.add(stddrawPanel,BorderLayout.CENTER);
         stddrawPanel.setSize(this.getWidth(),this.getHeight());
-
-        JButton newGameButton = new JButton("Nouvelle Partie");
-        newGameButton.addActionListener(e -> {
-            //stddrawPanel.repaint();
-            Frame.changePanel(0);
-        });
-
-        this.add(newGameButton, BorderLayout.SOUTH);
-
-
+        stddrawPanel.setBackground(Color.WHITE);
     }
 
 

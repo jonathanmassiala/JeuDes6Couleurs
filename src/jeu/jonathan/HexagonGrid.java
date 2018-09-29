@@ -16,7 +16,6 @@ public class HexagonGrid extends Board {
         }
         this.size = size;
         this.sizeBoard = 4 + 6 * size;
-        //this.sizeBoard =  4 * size;
         this.tailleInterface = 0.3;
         this.nbCases = 3 * size * (size + 1) + 1;
         cases = new Case[2 * size + 1][2 * size + 1];
@@ -60,7 +59,6 @@ public class HexagonGrid extends Board {
 
         for (int color : colorTakenByAPlayer) {
             index = notControlledColors.indexOf(color);
-            System.out.println("index :" + index);
             notControlledColors.remove(index);
         }
 

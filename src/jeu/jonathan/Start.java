@@ -7,7 +7,6 @@ import java.io.IOException;
 public class Start {
 
     public static void main(String[] args) throws IOException, FontFormatException {
-
-        JFrame frame = new Frame();
+        new Frame();
     }
 }
